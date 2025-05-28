@@ -16,6 +16,8 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ``sudo ./turnbinds``
 ### sudo is required due to uinputs needing kernel access, it's possible to run without root, although I find it to be a bit convoluted
 
+## How to do it:
+
 ## Create a udev rule
 ### sudo vim /etc/udev/rules.d/99-uinput.rules
 
