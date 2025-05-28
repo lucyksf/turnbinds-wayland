@@ -23,7 +23,7 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 
 ### Add the following:
 ``KERNEL=="uinput", MODE="0660", GROUP="input"``
-#
+###
 ``KERNEL=="event*", MODE="0660", GROUP="input"``
 
 ## Add your user to the ``input`` group
