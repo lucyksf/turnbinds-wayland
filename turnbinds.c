@@ -12,9 +12,9 @@
 #define die(str, args...) do { perror(str); exit(EXIT_FAILURE); } while(0)
 
 // settings!
-const int left_speed = 150;
-const int right_speed = 150;
-const int override_speed = 600;
+const int left_speed = CHANGE_ME;
+const int right_speed = CHANGE_ME;
+const int override_speed = CHANGE_ME;
 
 const int override_key_code = KEY_E;        // press and hold to use the override speed
 const int toggle_key_code = KEY_COMMA;      // press to toggle turnbinds on/off
@@ -120,8 +120,7 @@ int main(void) {
             }
         }
 
-        usleep(9500); //usleep(10000);
-        // feel free to mess around with the timing,
+        usleep(6060); // for a 165Hz monitor
         // it changes the smoothness and sensitvitiy (requires look_left, look_right & override_speed to be changed as well!!)
     }
 
