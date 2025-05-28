@@ -9,10 +9,10 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ## Arch (-based) systems
 ``sudo pacman -S base-devel linux-headers``
 
-# Compiling
+## Compiling
 ``gcc -o turnbinds turnbinds.c``
 
-# Usage
+## Usage
 ``sudo ./turnbinds``
 ### sudo is required due to uinputs needing kernel access, it's possible to run without root, although I find it to be a bit convoluted
 
