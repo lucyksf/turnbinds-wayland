@@ -3,11 +3,11 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 
 # Requirements
 ## Debian/Ubuntu
-sudo apt update
-sudo apt install build-essential linux-headers
+``sudo apt update``
+``sudo apt install build-essential linux-headers``
 
 ## Arch (-based) systems
-sudo pacman -S base-devel linux-headers
+``sudo pacman -S base-devel linux-headers``
 
 # Compiling
 ## ``gcc -o turnbinds turnbinds.c``
