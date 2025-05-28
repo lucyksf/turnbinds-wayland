@@ -10,10 +10,10 @@ sudo apt install build-essential linux-headers
 sudo pacman -S base-devel linux-headers
 
 # Compiling
-gcc -o turnbinds turnbinds.c
+## ``gcc -o turnbinds turnbinds.c``
 
 # Usage
-sudo ./turnbinds
+``sudo ./turnbinds``
 ## sudo is required due to uinputs needing kernel access, it's possible to run without root, although I find it to be a bit convoluted
 
 ## Create a udev rule
