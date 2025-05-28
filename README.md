@@ -10,11 +10,11 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ``sudo pacman -S base-devel linux-headers``
 
 # Compiling
-## ``gcc -o turnbinds turnbinds.c``
+``gcc -o turnbinds turnbinds.c``
 
 # Usage
 ``sudo ./turnbinds``
-## sudo is required due to uinputs needing kernel access, it's possible to run without root, although I find it to be a bit convoluted
+### sudo is required due to uinputs needing kernel access, it's possible to run without root, although I find it to be a bit convoluted
 
 ## Create a udev rule
 ### sudo vim /etc/udev/rules.d/99-uinput.rules
