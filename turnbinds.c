@@ -85,7 +85,7 @@ int main(void) {
 
     printf("Turnbinds initially ENABLED. Press ',' (comma) to toggle.\n");
 
-    while (1) {
+    while(1) {
         if(poll(fds, 2, 10) < 0) die("poll");
 
         // keyboard input
