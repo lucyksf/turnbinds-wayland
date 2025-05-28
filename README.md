@@ -22,7 +22,7 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ``sudo vim /etc/udev/rules.d/99-uinput.rules``
 
 ### Add the following:
-``KERNEL=="uinput", MODE="0660", GROUP="input"``
+``KERNEL=="uinput", MODE="0660", GROUP="input"``\n
 ``KERNEL=="event*", MODE="0660", GROUP="input"``
 
 ## Add your user to the ``input`` group
