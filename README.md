@@ -19,6 +19,7 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ### How to do it:
 
 ## Create a udev rule
+``sudo touch /etc/udev/rules.d/99-uinput.rules``
 ``sudo vim /etc/udev/rules.d/99-uinput.rules``
 
 ### Add the following:
@@ -32,4 +33,8 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ## Reload udev
 ``sudo udevadm control --reload-rules``
 ``sudo udevadm trigger``
-#### And relogin
+#### And relogin/restart
+
+
+
+# :)
