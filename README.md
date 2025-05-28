@@ -4,6 +4,7 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 # Requirements
 ## Debian/Ubuntu
 ``sudo apt update``
+###
 ``sudo apt install build-essential linux-headers``
 
 ## Arch (-based) systems
@@ -33,6 +34,7 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 
 ## Reload udev
 ``sudo udevadm control --reload-rules``
+###
 ``sudo udevadm trigger``
 #### And relogin/restart
 
