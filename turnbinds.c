@@ -122,6 +122,8 @@ int main(void) {
 
         usleep(6060); // for a 165Hz monitor
         // it changes the smoothness and sensitvitiy (requires look_left, look_right & override_speed to be changed as well!!)
+        // the number you put here is the number you got from "sudo libinput debug-events --device /dev/input/eventX" after "POINTER_MOTION"
+        // in my case: 6446 / 165 ≈ 39.06666667
     }
 
     ioctl(ufd, UI_DEV_DESTROY);
