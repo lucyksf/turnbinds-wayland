@@ -46,6 +46,12 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ``sudo udevadm trigger``
 #### And relogin/restart
 
+### You can also make an alias to run the file
+###
+### ``vim ~/.bashrc`` (OR ~/.zshrc)
+###
+### ``alias nameHere="sudo ~/location/turnbinds"
+
 
 
 # :)
