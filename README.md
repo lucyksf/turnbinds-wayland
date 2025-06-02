@@ -11,7 +11,7 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ``sudo pacman -S base-devel linux-headers evtest``
 
 # How to find your sensitivity
-## Run ``evtest`` and find your mouse input, then run
+## Run ``sudo evtest`` and find your mouse input, then run
 ###
 ## ``sudo libinput debug-events --device /dev/input/eventX`` X=your mouse input number
 ###
