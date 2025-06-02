@@ -1,6 +1,15 @@
 # Turnbinds for Wayland
 This is an application written in C to bring turnbinds (just like AHK) to Wayland on Linux :)
 
+# Requirements
+## Debian/Ubuntu
+``sudo apt update``
+###
+``sudo apt install build-essential linux-headers evtest``
+
+## Arch (-based) systems
+``sudo pacman -S base-devel linux-headers evtest``
+
 # How to find your sensitivity
 ## Run ``evtest`` and find your mouse input, then run
 ###
@@ -8,15 +17,6 @@ This is an application written in C to bring turnbinds (just like AHK) to Waylan
 ###
 ## Move your mouse steadily for a few seconds, you'll see a lot of ``event3   POINTER_MOTION    6446    +15.366s    0.00/  0.21 ( +0.00/ +1.00)``, the number 6446 will be different for you depending on your sensitivity, this number is what you want to save. Now you'll need to note your monitor's refresh rate. The equation goes as follows: POINTER_MOTION / REFRESH_RATE ≈ XX. This will be your number to put as your left_speed and right_speed
 ## Inside the code, you can adjust the usleep() function at the bottom to match with your monitor's refresh rate
-
-# Requirements
-## Debian/Ubuntu
-``sudo apt update``
-###
-``sudo apt install build-essential linux-headers``
-
-## Arch (-based) systems
-``sudo pacman -S base-devel linux-headers``
 
 ## Compiling
 ``gcc -o turnbinds turnbinds.c``
