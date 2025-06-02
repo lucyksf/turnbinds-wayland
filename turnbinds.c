@@ -1,5 +1,5 @@
-#include <linux/input.h>
 #include <linux/uinput.h>
+#include <linux/input.h>
 #include <sys/time.h>
 #include <stdbool.h>
 #include <string.h>
