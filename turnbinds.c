@@ -1,13 +1,13 @@
-#include <fcntl.h>
 #include <linux/input.h>
 #include <linux/uinput.h>
-#include <stdio.h>
+#include <sys/time.h>
+#include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
-#include <poll.h>
-#include <stdbool.h>
 #include <stdlib.h>
-#include <sys/time.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <poll.h>
 
 #define die(str, args...) do { perror(str); exit(EXIT_FAILURE); } while(0)
 
@@ -17,8 +17,7 @@ const int right_speed = CHANGE_ME;
 const int override_speed = CHANGE_ME;
 
 const int override_key_code = KEY_E;        // press and hold to use the override speed
-const int toggle_key_code = KEY_COMMA;      // press to toggle turnbinds on/off
-
+const int toggle_key_code = KEY_GRAVE;      // press to toggle turnbinds on/off (`)
 
 void emit(int fd, int type, int code, int val) {
     struct input_event ie;
@@ -40,6 +39,7 @@ int read_mouse_buttons(int fd, bool *left_down, bool *right_down) {
             else if(ev.code == BTN_RIGHT) *right_down = (ev.value != 0);
         }
     }
+    
     return 0;
 }
 
@@ -67,10 +67,8 @@ int main(void) {
     sleep(1);
 
     // adjust these to your actual input devices (dev/input/eventX, X=YOUR DEVICE)
-    // to find the directory of your inputs, install "evtest" (same name on Debian based distribution & on Arch!), then run "evtest" in your terminal
-    // select "xyz keyboard" and "xyz mouse" and find the correct one
-    int kb_fd = open("/dev/input/event6", O_RDONLY | O_NONBLOCK);       // Keyboard
-    int mouse_fd = open("/dev/input/event3", O_RDONLY | O_NONBLOCK);    // Mouse
+    int kb_fd = open("/dev/input/eventX", O_RDONLY | O_NONBLOCK);       // Keyboard
+    int mouse_fd = open("/dev/input/eventX", O_RDONLY | O_NONBLOCK);    // Mouse
 
     if(kb_fd < 0 || mouse_fd < 0) die("open input devices");
 
@@ -83,19 +81,18 @@ int main(void) {
     bool override_down = false;
     bool turnbinds_enabled = true;
 
-    printf("Turnbinds initially ENABLED. Press ',' (comma) to toggle.\n");
+    printf("Turnbinds enabled\n");
 
     while(1) {
         if(poll(fds, 2, 10) < 0) die("poll");
 
-        // keyboard input
         if(fds[0].revents & POLLIN) {
             struct input_event ev;
             
             while(read(kb_fd, &ev, sizeof(ev)) == sizeof(ev)) {
                 if(ev.type == EV_KEY) {
                     if(ev.code == override_key_code) override_down = (ev.value != 0);
-                    else if(ev.code == toggle_key_code && ev.value == 1) { // toggle key pressed
+                    else if(ev.code == toggle_key_code && ev.value == 1) {
                         turnbinds_enabled = !turnbinds_enabled;
                         system("clear");
                         printf("Turnbinds %s\n", turnbinds_enabled ? "ENABLED" : "DISABLED");
@@ -103,8 +100,7 @@ int main(void) {
                 }
             }
         }
-
-        // mouse buttons
+        
         read_mouse_buttons(mouse_fd, &left_down, &right_down);
 
         if(turnbinds_enabled) {
@@ -121,7 +117,7 @@ int main(void) {
         }
 
         usleep(6060); // for a 165Hz monitor
-        // it changes the smoothness and sensitvitiy (requires look_left, look_right & override_speed to be changed as well!!)
+        // usleep() changes the smoothness and sensitvitiy (requires look_left, look_right & override_speed to be changed as well!!)
         // the number you put here is the number you got from "sudo libinput debug-events --device /dev/input/eventX" after "POINTER_MOTION"
         // in my case: 6446 / 165 ≈ 39.06666667
     }
