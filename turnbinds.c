@@ -11,6 +11,10 @@
 
 #define die(str, args...) do { perror(str); exit(EXIT_FAILURE); } while(0)
 
+bool left_down = false, right_down = false;
+bool turnbinds_enabled = true;    
+bool override_down = false;
+
 // settings!
 const int left_speed = CHANGE_ME;
 const int right_speed = CHANGE_ME;
@@ -33,13 +37,17 @@ void emit(int fd, int type, int code, int val) {
 int read_mouse_buttons(int fd, bool *left_down, bool *right_down) {
     struct input_event ev;
 
-    while(read(fd,&ev,sizeof(ev)) == sizeof(ev)) {
+    while(read(fd, &ev, sizeof(ev)) == sizeof(ev)) {
         if(ev.type == EV_KEY) {
             if(ev.code == BTN_LEFT) *left_down = (ev.value != 0);
             else if(ev.code == BTN_RIGHT) *right_down = (ev.value != 0);
+        } else if(ev.type == EV_REL) {
+            if(turnbinds_enabled) {
+                continue;
+            }
         }
     }
-    
+
     return 0;
 }
 
@@ -77,10 +85,7 @@ int main(void) {
         { .fd = mouse_fd, .events = POLLIN }
     };
 
-    bool left_down = false, right_down = false;
-    bool override_down = false;
-    bool turnbinds_enabled = true;
-
+    system("clear");
     printf("Turnbinds enabled\n");
 
     while(1) {
@@ -95,7 +100,7 @@ int main(void) {
                     else if(ev.code == toggle_key_code && ev.value == 1) {
                         turnbinds_enabled = !turnbinds_enabled;
                         system("clear");
-                        printf("Turnbinds %s\n", turnbinds_enabled ? "ENABLED" : "DISABLED");
+                        printf("Turnbinds %s\n", turnbinds_enabled ? "enabled" : "disabled");
                     }
                 }
             }
